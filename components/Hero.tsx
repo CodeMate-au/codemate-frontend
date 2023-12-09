@@ -117,7 +117,7 @@ const Hero: React.FC = () => (
                   boxShadow: "0 1px 1px #0c192714, 0 1px 3px #0c192724",
                 }}
               >
-                <span className="mr-2"> Try it out </span>
+                <span className="mr-2"> Sign In </span>
                 <svg
                   className="w-5 h-5"
                   viewBox="0 0 24 24"
