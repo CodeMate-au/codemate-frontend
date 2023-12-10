@@ -1,18 +1,23 @@
+"use client"
 import styles from "@/styles/style";
-import { discount, robot } from "@/public/assets";
-import GetStarted from "./GetStarted";
-import Image from "next/image";
+// import { discount, robot } from "@/public/assets";
+// import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 
-const Hero: React.FC = () => (
-  <section id="home" className={`flex md:flex-row flex-col ${styles.paddingY}`}>
-   
-  <AnimatePresence>
-       
+
+type code = {
+  code: string;
+}
+export default function Hero() {
+  return (
+    <section id="home" className={`flex md:flex-row flex-col ${styles.paddingY}`}>
+
+      <AnimatePresence>
+
         <main className="h-96 flex flex-col justify-center grid-rows-[1fr_repeat(3,auto)_1fr] md:px-20 md:py-0 my-[120px]">
-          
-        <motion.h1
+
+          <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -22,11 +27,11 @@ const Hero: React.FC = () => (
             }}
             className="relative md:ml-[-10px] md:mb-[37px] font-extrabold text-[16vw] md:text-[130px] font-inter text-[#ffffff] leading-[0.9] tracking-[-2px] z-[100]"
           >
-      
+
             Code <span className="text-[#407BBF]"> Mates</span>
             <span className="font-inter text-[#407BBF]">.</span>
           </motion.h1>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -111,7 +116,7 @@ const Hero: React.FC = () => (
               }}
             >
               <Link
-                href="/login/github"
+                href={`http://localhost:8888/api/auth/github/login`}
                 className="group rounded-full px-4 py-2 text-[13px] font-semibold transition-all flex items-center justify-center bg-[#f5f7f9] text-[#1E2B3A] no-underline active:scale-95 scale-100 duration-75"
                 style={{
                   boxShadow: "0 1px 1px #0c192714, 0 1px 3px #0c192724",
@@ -142,11 +147,10 @@ const Hero: React.FC = () => (
               </Link>
             </motion.div>
           </div>
-          
+
         </main>
-    </AnimatePresence>
+      </AnimatePresence>
 
-  </section>
-);
-
-export default Hero;
+    </section>
+  );
+}
