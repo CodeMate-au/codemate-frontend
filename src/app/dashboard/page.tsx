@@ -1,15 +1,14 @@
-"use client"
-import useSWR from 'swr';
+// "use client"
+// 'use server'
 
-const fetcher = (url: string) => fetch(url, { credentials: 'include' }).then(res => res.json());
+import { useUser } from '../lib/data';
+import { getUser } from '../api/user'
+import Welcome from '../ui/dashboard/welcome';
 
-export default function Page() {
-  const { data: user, error } = useSWR(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user`, fetcher);
+export default async function Page() {
 
-  if (error) return <div>Failed to load user info.</div>;
-  if (!user) return <div>Loading...</div>;
-
+  const user = await getUser();
   return (
-    <div>Welcome, {user.name}!</div>
+    <Welcome></Welcome>
   );
-};
+}
