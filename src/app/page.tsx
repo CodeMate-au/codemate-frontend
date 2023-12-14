@@ -1,20 +1,16 @@
 import styles from "@/styles/style";
-import { Navbar, Hero, Footer } from "@src/app/ui/landing"
+import { Hero } from "@src/app/components/ui/landing"
+import { Header, Footer } from "@src/app/components/layout";
 export default function Page() {
   return (
     <>
-      <div className="bg-primary w-full overflow-hidden">
-        <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-          <div className={`${styles.boxWidth}`}>
-            <Navbar />
-          </div>
-        </div>
-        <div className={`bg-primary ${styles.flexStart}`}>
+      <div className="bg-w-full overflow-hidden">
+        <div className={`${styles.flexStart}`}>
           <div className={`${styles.boxWidth}`}>
             <Hero />
           </div>
         </div>
-        <div className={`bg-primary ${styles.paddingX} ${styles.flexStart}`}>
+        <div className={`${styles.paddingX} ${styles.flexStart}`}>
           <div className={`${styles.boxWidth}`}>
             <Footer />
           </div>

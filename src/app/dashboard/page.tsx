@@ -3,12 +3,15 @@
 
 import { useUser } from '../lib/data';
 import { getUser } from '../api/user'
-import Welcome from '../ui/dashboard/welcome';
+import { Room } from "../components/Room";
+import { CollaborativeEditor } from "../components/ui/dashboard/CodeMirror/Editor";
 
 export default async function Page() {
 
   const user = await getUser();
   return (
-    <Welcome></Welcome>
+    <Room>
+      <CollaborativeEditor />
+    </Room>
   );
 }

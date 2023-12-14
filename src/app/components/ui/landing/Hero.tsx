@@ -1,7 +1,5 @@
 "use client"
 import styles from "@/styles/style";
-// import { discount, robot } from "@/public/assets";
-// import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 
@@ -25,7 +23,7 @@ export default function Hero() {
               duration: 0.95,
               ease: [0.165, 0.84, 0.44, 1],
             }}
-            className="relative md:ml-[-10px] md:mb-[37px] font-extrabold text-[16vw] md:text-[130px] font-inter text-[#ffffff] leading-[0.9] tracking-[-2px] z-[100]"
+            className="relative md:ml-[-10px] md:mb-[37px] font-extrabold text-[16vw] md:text-[130px] font-inter leading-[0.9] tracking-[-2px] z-[100]"
           >
 
             Code <span className="text-[#407BBF]"> Mates</span>
@@ -43,19 +41,19 @@ export default function Hero() {
             className="flex flex-row justify-center z-20 mx-0 mb-0 mt-8 md:mt-0 md:mb-[35px] max-w-2xl md:space-x-8"
           >
             <div className="w-1/2">
-              <h2 className="flex items-center font-semibold text-[1em] text-[#fff]">
+              <h2 className="flex items-center font-semibold text-[1em] ">
                 Platform
               </h2>
-              <p className="text-[14px] leading-[20px] text-[#fff] font-normal">
+              <p className="text-[14px] leading-[20px] font-normal">
                 Full access to our platform, including all questions and
                 solutions.
               </p>
             </div>
             <div className="w-1/2">
-              <h2 className="flex items-center font-semibold text-[1em] text-[#fff]">
+              <h2 className="flex items-center font-semibold text-[1em]">
                 Community
               </h2>
-              <p className="text-[14px] leading-[20px] text-[#fff] font-normal">
+              <p className="text-[14px] leading-[20px] font-normal">
                 Join a community of like-minded individuals, and learn from each
                 other.
               </p>
@@ -83,7 +81,7 @@ export default function Hero() {
               >
                 <span className="w-5 h-5 rounded-full bg-[#407BBF] flex items-center justify-center">
                   <svg
-                    className="w-[16px] h-[16px] text-white"
+                    className="w-[16px] h-[16px"
                     fill="none"
                     viewBox="0 0 24 24"
                   >
@@ -116,7 +114,7 @@ export default function Hero() {
               }}
             >
               <Link
-                href={`http://localhost:8888/api/auth/github/login`}
+                href={`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/github/login`}
                 className="group rounded-full px-4 py-2 text-[13px] font-semibold transition-all flex items-center justify-center bg-[#f5f7f9] text-[#1E2B3A] no-underline active:scale-95 scale-100 duration-75"
                 style={{
                   boxShadow: "0 1px 1px #0c192714, 0 1px 3px #0c192724",

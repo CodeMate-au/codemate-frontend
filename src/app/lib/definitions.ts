@@ -1,7 +1,7 @@
-export type User = {
+export interface User {
   id: string;
   name: string | undefined;
-  email: string;
+  email: string | undefined;
   githubId: string;
   avatar: string | undefined;
-};
+}

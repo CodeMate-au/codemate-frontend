@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="flex-1 flex flex-col justify-start mr-10">
           <h1
 
-            className="text-[30px] text-[#ffffff]"
+            className="text-[30px]"
           >
 
             Code <span className="text-[#407BBF]"> Mates</span>
@@ -26,7 +26,7 @@ export default function Footer() {
               className="flex flex-col ss:my-0 my-4 mix-w-[150px"
             >
               <h4
-                className={`font-poppins font-medium text-[18px] leading-[27px] text-white`}
+                className={`font-poppins font-medium text-[18px] leading-[27px]`}
               >
                 {footerLink.title}
               </h4>

@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { User } from '../lib/definitions';
+import { redirect } from 'next/navigation';
 
 export async function getUser() {
   const cookieStore = cookies();
@@ -10,10 +11,14 @@ export async function getUser() {
       Cookie: `session-token=${token};`,
     },
   });
+  // console.log('res catch', res);
 
-  const json = await res.json();
-  if (res.status !== 200) {
-    throw new Error(json.message);
+  if (!res.ok) {
+    const errorResponse = await res.json();
+
+    if (errorResponse.status === 401) {
+      redirect('/');
+    }
   }
-  return json as User;
+  return res.json();
 }
