@@ -14,9 +14,7 @@ export async function getUser() {
   // console.log('res catch', res);
 
   if (!res.ok) {
-    const errorResponse = await res.json();
-
-    if (errorResponse.status === 401) {
+    if (res.status === 401) {
       redirect('/');
     }
   }

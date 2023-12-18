@@ -5,3 +5,9 @@ export interface User {
   githubId: string;
   avatar: string | undefined;
 }
+
+export type LiveblockUser = {
+  name: string;
+  color: string;
+  picture: string;
+};

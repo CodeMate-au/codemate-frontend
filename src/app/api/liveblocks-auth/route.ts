@@ -1,6 +1,7 @@
 import { Liveblocks } from '@liveblocks/node';
 import { NextRequest } from 'next/server';
 import { getUser } from '../user';
+import type { LiveblockUser } from '@src/app/lib/definitions';
 const API_KEY = process.env.LIVEBLOCKS_SECRET_KEY;
 
 const liveblocks = new Liveblocks({ secret: API_KEY! });
@@ -19,7 +20,7 @@ export async function POST(request: NextRequest) {
   };
 
   // Create a session for the current user
-  // UserInfois made available in Liveblocks presence hooks, e.g. useOthers
+  // UserInfo is made available in Liveblocks presence hooks, e.g. useOthers
   const session = liveblocks.prepareSession(user.id, {
     userInfo: user.info,
   });
