@@ -6,7 +6,7 @@ export default async function Welcome() {
   const user = await getUser();
 
   return (
-    <div>
+    <div className="font-semibold text-[1em]">
       {user ? `Welcome ${user.name}` : `Welcome`}
     </div>
   );

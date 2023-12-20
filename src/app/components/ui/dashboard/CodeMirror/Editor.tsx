@@ -57,7 +57,7 @@ export function CollaborativeEditor() {
       extensions: [
         basicSetup,
         javascript(),
-        yCollab(ytext, provider.awareness, { undoManager }),
+        yCollab(ytext,                                                                                                                                                        provider.awareness, { undoManager }),
       ],
     });
 
