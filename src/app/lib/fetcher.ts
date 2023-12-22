@@ -1,6 +1,7 @@
-export default async function fetcher(url: string) {
+export default async function fetcher(url: string, options: any = {}) {
   const res = await fetch(url, {
     credentials: 'include',
+    ...options,
   });
 
   if (!res.ok) {

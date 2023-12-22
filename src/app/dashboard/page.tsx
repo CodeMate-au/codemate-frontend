@@ -1,20 +1,27 @@
-// "use client"
-// 'use server'
-
-import { useUser } from '../lib/data';
-import { getUser } from '../api/user'
+"use client"
 import { Room } from "../components/Room";
-import { CollaborativeEditor } from "../components/ui/dashboard/CodeMirror/Editor";
+import { CollaborativeEditor } from "../components/ui/CodeMirror/Editor";
 import styles from "@/styles/style";
 
-export default async function Page() {
 
-  const user = await getUser();
+import { useState } from 'react';
+import OutputTerminal from '../components/ui/outputTerminal';
+import LanguageDropdown from '../components/ui/LanguageDropdown';
+import { LANGUAGE_OPTIONS } from "@src/app/components/ui/LanguageDropdown/constant";
+
+
+export default function Page() {
+  const [selectedLanguage, setSelectedLanguage] = useState(LANGUAGE_OPTIONS[0]);
+
   return (
     <div className={`${styles.flexStart}`}>
       <div className={`${styles.boxWidth} ${styles.paddingX} ${styles.paddingY}`}>
+        <LanguageDropdown
+          selectedLanguage={selectedLanguage}
+          setSelectedLanguage={setSelectedLanguage}
+        />
         <Room>
-          <CollaborativeEditor />
+          <CollaborativeEditor selectedLanguage={selectedLanguage} />
         </Room>
       </div>
     </div>
