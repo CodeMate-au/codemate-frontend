@@ -39,6 +39,8 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
   const [output, setOutput] = useState(DEFAULT_OUTPUT_VALUE);
   const [ytext, setYtext] = useState<Y.Text | null>(null);
 
+  const [stdin, setStdin] = useState<string>('');
+
   // Get user info from Liveblocks authentication endpoint
   const userInfo: LiveblockUser | unknown = useSelf((me) => me.info);
   const ref = useCallback((node: HTMLElement | null) => {
@@ -120,7 +122,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
       setIsLoading(true);
       clearOutput();
 
-      const token = await submitCodeHandler({ source_code: code, language_id: selectedLanguage.value, stdin: null });
+      const token = await submitCodeHandler({ source_code: code, language_id: selectedLanguage.value, stdin: stdin });
 
       const response = await fetch(`/api/get_submission?token=${token}`, {
         method: 'GET',
@@ -137,7 +139,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
       }
       console.log('outpåut', outputData);
 
-      setOutput(assoc('data', outputData.stdout));
+      setOutput(assoc('data', outputData.stdout || outputData.stderr));
       setOutput(assoc('status', outputData.status.id));
 
       setSelectedIndex(1);
@@ -204,23 +206,25 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
           <Tab className={({ selected }) =>
             classNames(
               'text-xl dark:bg-slate-700 bg-white px-2',
+              'focus:outline-none',
               selected
-                ? ' '
+                ? 'focus-visible:ring-0'
                 : 'opacity-40 bg hover:opacity-90'
             )
           }>Input</Tab>
           <Tab className={({ selected }) =>
             classNames(
               'text-xl dark:bg-slate-700 bg-white px-2 ',
+              'focus:outline-none',
               selected
-                ? ''
+                ? 'focus-visible:ring-0'
                 : 'opacity-40 bg hover:bg-white/[0.12]'
             )
           }> Output</Tab>
         </Tab.List>
         <Tab.Panels>
           <Tab.Panel>
-            <InputTerminal stdinRef={inputStateRef} />
+            <InputTerminal stdinRef={inputStateRef} setStdin={setStdin} stdin={stdin} />
           </Tab.Panel>
           <Tab.Panel>
             <OutputTerminal output={output?.data} stdoutRef={outputStateRef} />

@@ -3,7 +3,7 @@
 
 @layer components {
   .container {
-    @apply flex flex-col relative bg-white dark:bg-slate-700 w-full h-full text-black overflow-hidden;
+    @apply flex flex-col relative bg-white dark:bg-slate-700 w-full h-full text-black;
   }
 
   .editorHeader {

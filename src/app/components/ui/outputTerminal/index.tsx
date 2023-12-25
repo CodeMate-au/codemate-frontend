@@ -24,7 +24,6 @@ export default function OutputTerminal({ output, stdoutRef }: Props) {
       view = new EditorView({
         state: state,
         parent: stdoutRef.current,
-
       })
     }
     return () => {

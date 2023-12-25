@@ -49,6 +49,6 @@ export async function GET(request: NextRequest) {
   const response = await getSubmission(token);
   const data = await response.json();
 
-  console.log('data here', data);
+  console.log('data response', data);
   return Response.json(data);
 }
