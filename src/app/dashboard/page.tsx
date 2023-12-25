@@ -14,16 +14,16 @@ export default function Page() {
   const [selectedLanguage, setSelectedLanguage] = useState(LANGUAGE_OPTIONS[0]);
 
   return (
-    <div className={`${styles.flexStart}`}>
-      <div className={`${styles.boxWidth} ${styles.paddingX} ${styles.paddingY}`}>
-        <LanguageDropdown
-          selectedLanguage={selectedLanguage}
-          setSelectedLanguage={setSelectedLanguage}
-        />
-        <Room>
-          <CollaborativeEditor selectedLanguage={selectedLanguage} />
-        </Room>
-      </div>
+
+    <div className={`${styles.padding}`}>
+      <LanguageDropdown
+        selectedLanguage={selectedLanguage}
+        setSelectedLanguage={setSelectedLanguage}
+      />
+      <Room>
+        <CollaborativeEditor selectedLanguage={selectedLanguage} />
+      </Room>
     </div>
+
   );
 }

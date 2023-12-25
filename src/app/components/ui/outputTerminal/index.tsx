@@ -1,17 +1,44 @@
 "use client"
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
+import { EditorView, basicSetup } from "codemirror";
+import { EditorState } from "@codemirror/state";
+
+import EditorStyles from "@styles/Editor.module.css";
+
 
 type Props = {
   output: string
+  stdoutRef: React.RefObject<HTMLDivElement>
 }
 
-export default function OutputTerminal({ output }: Props) {
-  return (
-    <div
-      className="block px-1 w-full h-36 text-sm bg-gray-800 text-white border focus:ring-0 border-gray-400 mt-2"
-    >
-      {output}
+export default function OutputTerminal({ output, stdoutRef }: Props) {
+  useEffect(() => {
+    let view: EditorView | null;
 
+    if (stdoutRef.current) {
+      const state = EditorState.create({
+        doc: output,
+        extensions: [basicSetup, EditorView.editable.of(false)],
+      })
+
+      view = new EditorView({
+        state: state,
+        parent: stdoutRef.current,
+
+      })
+    }
+    return () => {
+      view?.destroy();
+    }
+  }, [stdoutRef, output])
+
+  return (
+    <div className={EditorStyles.container}>
+
+      <div
+        className={EditorStyles.inputOutputContainer}
+        ref={stdoutRef}
+      />
     </div>
   )
 }

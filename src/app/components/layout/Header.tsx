@@ -13,7 +13,7 @@ export default function Header() {
 
 
   return (
-    <header className="w-full flex py-6 justify-between items-center navbar mt-[40px]">
+    <header className="w-full flex px-6 justify-between items-center navbar mt-[40px]">
 
       <h1
         className="text-[25px]"

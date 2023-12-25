@@ -12,13 +12,13 @@ const RootLayout = ({ children }: { children: React.ReactNode; }) => {
     <html lang="en" suppressHydrationWarning={true}>
       <body>
         <Provider>
+          <Header />
           <div className="bg-w-full overflow-hidden">
             <div className={`${styles.paddingX} ${styles.flexCenter}`}>
               <div className={`${styles.boxWidth}`}>
-                <Header />
+                {children}
               </div>
             </div>
-            {children}
           </div>
         </Provider>
       </body>

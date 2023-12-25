@@ -6,13 +6,15 @@ import { EditorView, basicSetup } from "codemirror";
 import { java } from '@codemirror/lang-java';
 import { python } from '@codemirror/lang-python';
 import { EditorState } from "@codemirror/state";
-import { indentWithTab } from "@codemirror/commands"
-import { keymap } from "@codemirror/view";
+import { indentWithTab, defaultKeymap, historyKeymap, history } from "@codemirror/commands"
+import { drawSelection, keymap, lineNumbers } from "@codemirror/view"
 import { javascript } from "@codemirror/lang-javascript";
 import { useCallback, useEffect, useState, useRef } from "react";
 import LiveblocksProvider from "@liveblocks/yjs";
 import { TypedLiveblocksProvider, useRoom, useSelf } from "@/liveblocks.config";
-import styles from "@styles/Editor.module.css";
+import EditorStyles from "@styles/Editor.module.css";
+import styles from "@styles/style";
+
 import { Avatars } from "./Avatars";
 import { Toolbar } from "./Toolbar";
 
@@ -21,7 +23,9 @@ import { LANGUAGE_OPTIONS } from "../LanguageDropdown/constant";
 import OutputTerminal from "../outputTerminal";
 import { DEFAULT_OUTPUT_VALUE } from "../outputTerminal/constant";
 import { assoc } from "ramda";
+import { Tab } from "@headlessui/react";
 import CodeAction from "../CodeActions";
+import InputTerminal from "../InputTerminal";
 type Props = {
   selectedLanguage: typeof LANGUAGE_OPTIONS[0]
 }
@@ -35,12 +39,8 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
   const [output, setOutput] = useState(DEFAULT_OUTPUT_VALUE);
   const [ytext, setYtext] = useState<Y.Text | null>(null);
 
-
   // Get user info from Liveblocks authentication endpoint
   const userInfo: LiveblockUser | unknown = useSelf((me) => me.info);
-
-  const editorRef = useRef(null);
-
   const ref = useCallback((node: HTMLElement | null) => {
     if (!node) return;
     setElement(node);
@@ -69,17 +69,13 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
     }
   }, [ytext]);
 
-
-  // useEffect(() => {
-  //   if (output?.data) {
-  //     outputRef.current.scrollIntoView({ behavior: "smooth" });
-  //   }
-  // }, [output]);
-
   useEffect(() => {
     let provider: TypedLiveblocksProvider;
     let ydoc: Y.Doc;
     let view: EditorView;
+    // let inputView: EditorView;
+
+
     if (!element || !room || !userInfo) {
       return;
     }
@@ -118,6 +114,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
     };
   }, [element, room, userInfo]);
 
+
   const runEditorCode = async () => {
     try {
       setIsLoading(true);
@@ -142,6 +139,8 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
 
       setOutput(assoc('data', outputData.stdout));
       setOutput(assoc('status', outputData.status.id));
+
+      setSelectedIndex(1);
 
     }
     catch (error) {
@@ -176,25 +175,62 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
     return data.token
   }
 
+  function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(' ')
+  }
+
+
+
+  const inputStateRef = useRef(null);
+  const outputStateRef = useRef(null);
+
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+
   return (
     <>
-
-      <div className={styles.container}>
-        <div className={styles.editorHeader}>
-          <div className="flex items-center">
-            <div>
-              {yUndoManager ? <Toolbar yUndoManager={yUndoManager} /> : null}
-            </div>
-            <Avatars />
+      <div className={`${EditorStyles.container} mb-2`}>
+        <div className={EditorStyles.editorHeader}>
+          <div>
+            {yUndoManager ? <Toolbar yUndoManager={yUndoManager} /> : null}
           </div>
+          <Avatars />
         </div>
-        <div className={styles.editorContainer} ref={ref}></div>
+        <div className={EditorStyles.editorContainer} ref={ref}></div>
       </div>
-      <CodeAction
+
+      <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
+        <Tab.List className='space-x-2'>
+          <Tab className={({ selected }) =>
+            classNames(
+              'text-xl dark:bg-slate-700 bg-white px-2',
+              selected
+                ? ' '
+                : 'opacity-40 bg hover:opacity-90'
+            )
+          }>Input</Tab>
+          <Tab className={({ selected }) =>
+            classNames(
+              'text-xl dark:bg-slate-700 bg-white px-2 ',
+              selected
+                ? ''
+                : 'opacity-40 bg hover:bg-white/[0.12]'
+            )
+          }> Output</Tab>
+        </Tab.List>
+        <Tab.Panels>
+          <Tab.Panel>
+            <InputTerminal stdinRef={inputStateRef} />
+          </Tab.Panel>
+          <Tab.Panel>
+            <OutputTerminal output={output?.data} stdoutRef={outputStateRef} />
+          </Tab.Panel>
+        </Tab.Panels>
+      </Tab.Group >
+      < CodeAction
         runEditorCode={runEditorCode}
       />
 
-      <OutputTerminal output={output?.data} />
     </>
   );
 }

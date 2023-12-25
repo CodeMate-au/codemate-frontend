@@ -4,9 +4,18 @@
 
 @layer base{
   body {
-      @apply dark:bg-[#00040f] bg-slate-200
+    @apply dark:bg-[#00040f] bg-slate-200
   }
 }
+
+@layer components {
+  .container {
+    @apply flex flex-col relative rounded dark:bg-slate-700 bg-white w-full h-full text-black overflow-hidden;
+  }
+}
+
+
+
 
 :root {
   --black-gradient: linear-gradient(144.39deg,
