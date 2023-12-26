@@ -6,7 +6,6 @@ import { ClientSideSuspense } from "@liveblocks/react";
 
 export function Room({ children }: { children: ReactNode }) {
   const roomId = "liveblocks-tutorial-7kD1QX1dRO9ovi5fZyXyR";
-
   return (
     <RoomProvider
       id={roomId}
