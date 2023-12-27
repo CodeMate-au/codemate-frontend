@@ -14,11 +14,9 @@ const RootLayout = ({ children }: { children: React.ReactNode; }) => {
         <Provider>
 
           <div className="bg-w-full overflow-hidden">
-            <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-              <div className={`${styles.boxWidth}`}>
+   
                 {children}
-              </div>
-            </div>
+    
           </div>
         </Provider>
       </body>
