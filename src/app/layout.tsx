@@ -1,8 +1,8 @@
 import "@/styles/globals.css";
 import styles from "@/styles/style";
 export const metadata = {
-  title: "HooBank",
-  description: "Hoobank is an Modern Landing Page built with Next JS and Typescript",
+  title: "CodeMate",
+  description: "CodeMate is an Modern Landing Page built with Next JS and Typescript",
 };
 
 import Provider from "./provider";
@@ -12,13 +12,11 @@ const RootLayout = ({ children }: { children: React.ReactNode; }) => {
     <html lang="en" suppressHydrationWarning={true}>
       <body>
         <Provider>
-          <Header />
+
           <div className="bg-w-full overflow-hidden">
-            <div className={`${styles.paddingX} ${styles.flexCenter}`}>
-              <div className={`${styles.boxWidth}`}>
+   
                 {children}
-              </div>
-            </div>
+    
           </div>
         </Provider>
       </body>
