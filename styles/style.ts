@@ -10,6 +10,10 @@ const styles = {
   flexStart: 'flex justify-center items-start',
   flexEnd: 'flex justify-center items-end',
 
+  justifyCenter: 'flex justify-center items-center',
+  justifyStart: 'flex justify-start items-center',
+  justifyEnd: 'flex justify-end items-center',
+
   paddingX: 'sm:px-32 px-6',
   paddingY: 'sm:py-16 py-6',
   padding: 'sm:px-16 px-6 sm:py-12 py-4',

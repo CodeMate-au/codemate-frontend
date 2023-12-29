@@ -3,18 +3,23 @@ import Link from "next/link";
 import styles from "@styles/style";
 import ModalButton from "@src/app/components/ui/Dashboard/Modal/ModalButton";
 import { getRooms } from "@src/app/api/actions";
-import { Room } from "../lib/definitions";
+import { Room } from "@src/app/lib/definitions";
+import DeleteButton from "@src/app/components/ui/Dashboard/DeleteButton";
 export default async function Page() {
   const roomsmap = await getRooms();
   return (
     <>
       <div className={`flex-col ${styles.flexEnd}`}>
-        <ModalButton />
+        <div className={`${styles.flexCenter} space-x-4`}>
 
+          <DeleteButton />
+          <ModalButton />
+        </div>
       </div >
       <div className="w-full py-16 space-y-4">
         {roomsmap.map((room: Room) => (
           <Link
+            key={room.id}
             href={`dashboard/${room.id}`}
             className={
               ` flex cursor-pointer rounded-lg px-5 py-6 shadow-2xl bg-white dark:bg-gray-600
@@ -25,7 +30,6 @@ export default async function Page() {
           </Link>
         ))
         }
-
       </div>
       {/* <div>
         <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
