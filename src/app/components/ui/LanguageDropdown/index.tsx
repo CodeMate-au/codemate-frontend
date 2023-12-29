@@ -60,7 +60,7 @@ export default function LanguageDropdown({ selectedLanguage, setSelectedLanguage
                   <Listbox.Option
                     key={language.value}
                     className={({ active }) =>
-                      `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-amber-100 text-amber-900' : 'text-gray-900'
+                      `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-amber-100 text-amber-900' : ''
                       }`
                     }
                     value={language}
