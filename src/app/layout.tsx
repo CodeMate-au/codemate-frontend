@@ -14,9 +14,7 @@ const RootLayout = ({ children }: { children: React.ReactNode; }) => {
         <Provider>
 
           <div className="bg-w-full overflow-hidden">
-   
-                {children}
-    
+            {children}
           </div>
         </Provider>
       </body>

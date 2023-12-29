@@ -18,7 +18,7 @@ export default function Header() {
       <h1
         className="text-[25px]"
       >
-        Code <span className="text-[#407BBF]"> Mates</span>
+        Code <span className="text-rose-400"> Mates</span>
         <span className="font-inter text-[#407BBF]">.</span>
       </h1>
       <WelcomeClient>

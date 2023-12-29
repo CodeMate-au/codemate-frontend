@@ -53,7 +53,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
   ]);
 
   useEffect(() => {
-    if (selectedLanguage?.stub && ytext) {
+    if (ytext) {
       ytext.delete(0, ytext.length); // Clear the existing text
       ytext.insert(0, selectedLanguage.stub); // Insert the new stub
     }
@@ -94,7 +94,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
 
     // Set up CodeMirror and extensions
     const state = EditorState.create({
-      doc: ytext ? ytext.toString() : '',
+      doc: ytext ? ytext.toString() : selectedLanguage.stub,
       extensions: [
         basicSetup,
         selectedLanguage ? selectedLanguage.title === 'Java' ? java() : selectedLanguage.title === 'Python' ? python() : javascript() : javascript(),
@@ -234,7 +234,6 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
       < CodeAction
         runEditorCode={runEditorCode}
       />
-
     </>
   );
 }

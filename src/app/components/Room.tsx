@@ -3,9 +3,13 @@
 import { ReactNode } from "react";
 import { RoomProvider } from "@/liveblocks.config";
 import { ClientSideSuspense } from "@liveblocks/react";
+import { useParams } from 'next/navigation'
+
 
 export function Room({ children }: { children: ReactNode }) {
-  const roomId = "liveblocks-tutorial-7kD1QX1dRO9ovi5fZyXyR";
+  const params = useParams<{ room_id: string }>()
+
+  const roomId = `room-${params.room_id}`
   return (
     <RoomProvider
       id={roomId}

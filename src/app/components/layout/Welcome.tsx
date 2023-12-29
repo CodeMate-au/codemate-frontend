@@ -1,5 +1,5 @@
 import { User } from "@/src/app/lib/definitions";
-import { getUser } from "@src/app/api/user";
+import { getUser } from "@src/app/api/actions";
 import { redirect } from "next/navigation";
 
 export default async function Welcome() {

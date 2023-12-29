@@ -4,7 +4,7 @@
 
 @layer base{
   body {
-    @apply dark:bg-[#00040f] bg-slate-200
+    @apply dark:bg-[#00040f29] bg-[#fff9ff]
   }
 }
 

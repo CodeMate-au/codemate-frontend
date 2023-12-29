@@ -12,7 +12,7 @@ export default function Footer() {
             className="text-[30px]"
           >
 
-            Code <span className="text-[#407BBF]"> Mates</span>
+            Code <span className="text-rose-400"> Mates</span>
             <span className="font-inter text-[#407BBF]">.</span>
           </h1>
           <p className={`${styles.paragraph} mt-4 max-w-[310px]`}>

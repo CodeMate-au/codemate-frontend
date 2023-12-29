@@ -13,10 +13,5 @@ export async function getUser() {
   });
   // console.log('res catch', res);
 
-  if (!res.ok) {
-    if (res.status === 401) {
-      redirect('/');
-    }
-  }
   return res.json();
 }

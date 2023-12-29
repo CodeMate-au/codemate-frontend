@@ -31,3 +31,9 @@ export type Submission = {
   compile_only?: boolean;
   stdin_paused?: boolean;
 };
+
+export type Room = {
+  id: number;
+  name: string;
+  members: User[];
+};

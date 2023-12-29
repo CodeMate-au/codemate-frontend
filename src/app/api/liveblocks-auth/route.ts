@@ -1,6 +1,6 @@
 import { Liveblocks } from '@liveblocks/node';
 import { NextRequest } from 'next/server';
-import { getUser } from '../user';
+import { getUser } from '../actions';
 import type { LiveblockUser } from '@src/app/lib/definitions';
 const API_KEY = process.env.LIVEBLOCKS_SECRET_KEY;
 
@@ -27,6 +27,7 @@ export async function POST(request: NextRequest) {
 
   // Give the user access to the room
   const { room } = await request.json();
+  console.log('room response', room);
   session.allow(room, session.FULL_ACCESS);
 
   // Authorize the user and return the result

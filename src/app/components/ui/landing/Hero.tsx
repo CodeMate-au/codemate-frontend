@@ -26,8 +26,8 @@ export default function Hero() {
             className="relative md:ml-[-10px] md:mb-[37px] font-extrabold text-[16vw] md:text-[130px] font-inter leading-[0.9] tracking-[-2px] z-[100]"
           >
 
-            Code <span className="text-[#407BBF]"> Mates</span>
-            <span className="font-inter text-[#407BBF]">.</span>
+            Code <span className="text-rose-400"> Mates</span>
+            <span className="font-inter text-[#fae9fe ]">.</span>
           </motion.h1>
 
           <motion.div
