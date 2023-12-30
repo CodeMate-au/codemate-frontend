@@ -7,6 +7,7 @@ import styles from "@styles/style";
 import { useState } from 'react';
 import LanguageDropdown from '@src/app/components/ui/LanguageDropdown';
 import { LANGUAGE_OPTIONS } from "@src/app/components/ui/LanguageDropdown/constant";
+import ShareModal from "@src/app/components/ui/Dashboard/Share/ShareModal";
 
 
 export default function Page() {
@@ -15,6 +16,7 @@ export default function Page() {
   return (
 
     <div className={`${styles.padding}`}>
+      <ShareModal />
       <LanguageDropdown
         selectedLanguage={selectedLanguage}
         setSelectedLanguage={setSelectedLanguage}

@@ -70,6 +70,23 @@ export async function deleteRoom(id: number) {
   revalidatePath('/dashboard');
 }
 
+export async function getRoom(id: number) {
+  const cookieStore = cookies();
+  const token = cookieStore.get('session-token')?.value;
+  console.log('id', id);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/room/${id}`,
+    {
+      headers: {
+        Cookie: `session-token=${token};`,
+      },
+    },
+  );
+  const roomData = await res.json();
+
+  return roomData;
+}
+
 export async function getUser() {
   const cookieStore = cookies();
   const token = cookieStore.get('session-token')?.value;
