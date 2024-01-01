@@ -2,7 +2,6 @@
 import { cookies } from 'next/headers';
 import { User } from '../lib/definitions';
 import { redirect } from 'next/navigation';
-import { useRouter } from 'next/router';
 
 import { revalidatePath, revalidateTag } from 'next/cache';
 
@@ -53,7 +52,7 @@ export async function getRooms() {
 }
 
 export async function deleteRoom(id: number) {
-  console.log('id', id);
+  // console.log('id', id);
   const cookieStore = cookies();
   const token = cookieStore.get('session-token')?.value;
 
@@ -73,7 +72,7 @@ export async function deleteRoom(id: number) {
 export async function getRoom(id: number) {
   const cookieStore = cookies();
   const token = cookieStore.get('session-token')?.value;
-  console.log('id', id);
+  // console.log('id', id);
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/room/${id}`,
     {

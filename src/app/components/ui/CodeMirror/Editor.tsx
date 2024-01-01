@@ -37,7 +37,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
   const [code, setCode] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [output, setOutput] = useState(DEFAULT_OUTPUT_VALUE);
-  const [ytext, setYtext] = useState<Y.Text | null>(null);
+  const [ytext, setYtext] = useState<Y.Text>(new Y.Text());
 
   const [stdin, setStdin] = useState<string>('');
 
@@ -94,7 +94,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
 
     // Set up CodeMirror and extensions
     const state = EditorState.create({
-      doc: ytext ? ytext.toString() : selectedLanguage.stub,
+      doc: ytext.toString(),
       extensions: [
         basicSetup,
         selectedLanguage ? selectedLanguage.title === 'Java' ? java() : selectedLanguage.title === 'Python' ? python() : javascript() : javascript(),
@@ -124,7 +124,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
 
       const token = await submitCodeHandler({ source_code: code, language_id: selectedLanguage.value, stdin: stdin });
 
-      const response = await fetch(`/api/get_submission?token=${token}`, {
+      const response = await fetch(`/api/get_submission?token=${token!}`, {
         method: 'GET',
       });
 

@@ -34,6 +34,7 @@ export async function POST(request: NextRequest) {
   const checkRoom = await getRoom(Number(id));
 
   if (
+    checkRoom &&
     checkRoom.members.some((member: User) => member.id === session_user.id) &&
     room
   ) {
