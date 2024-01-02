@@ -1,3 +1,4 @@
+"use client"
 import "@/styles/globals.css";
 
 import Sidebar from "@src/app/components/layout/Sidebar";

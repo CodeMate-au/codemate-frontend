@@ -7,7 +7,7 @@ export default async function Welcome() {
 
   return (
     <>
-      {user ? `${user.name}` : `Welcome`}
+      {user ? `${user.name}` : `No User`}
     </>
   );
 }

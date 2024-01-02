@@ -8,23 +8,15 @@ import WelcomeClient from "./WelcomeClient";
 export default function Header() {
 
 
-  const cookieStore = cookies();
-  const token = cookieStore.get('session-token')?.value;
+  // const cookieStore = cookies();
+  // const token = cookieStore.get('session-token')?.value;
 
 
   return (
-    <header className="w-full flex px-6 justify-between items-center navbar mt-[40px]">
 
-      <h1
-        className="text-[25px]"
-      >
-        Code <span className="text-rose-400"> Mates</span>
-        <span className="font-inter text-[#407BBF]">.</span>
-      </h1>
       <WelcomeClient>
         <Welcome />
       </WelcomeClient>
-      <ThemeButton></ThemeButton>
-    </header>
+
   )
 }

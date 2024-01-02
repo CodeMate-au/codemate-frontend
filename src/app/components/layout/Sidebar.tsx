@@ -1,4 +1,4 @@
-"use client"
+
 import React from 'react'
 import "@/styles/globals.css";
 import { Fragment, useState } from 'react';
@@ -12,11 +12,19 @@ import {
 } from '@heroicons/react/24/outline'
 import ThemeButton from './ThemeButton';
 
+import Welcome from './Welcome';
+import WelcomeClient from './WelcomeClient';
+import Header from './Header';
+import { getUser } from "@src/app/api/actions";
+
+
 
 const teams = [
-    { id: 1, name: 'Profile', href: '#', icon: UsersIcon, current: false },
-    { id: 2, name: 'Home', href: '#', icon: HomeIcon, current: true },
+    { id: 1, name: 'Home', href: '#', icon: HomeIcon, current: true },
 
+]
+const profile = [
+    { name: "Vittoria Salim", githubId: "vittoriasalim", avatar: UsersIcon }
 ]
 
 function classNames(...classes: string[]) {
@@ -25,6 +33,7 @@ function classNames(...classes: string[]) {
 
 const Sidebar = ({ children }: { children: React.ReactNode; }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
+
 
     return (
         <div>
@@ -78,30 +87,24 @@ const Sidebar = ({ children }: { children: React.ReactNode; }) => {
                                             className="text-[25px]"
                                         >
                                             Code <span className="text-rose-400"> Mates</span>
-                                            <span className="font-inter text-[#407BBF]">.</span>
+                                            <span className="text-white">.</span>
+
                                         </h1>
                                     </div>
 
                                     <nav className="flex flex-1 flex-col">
                                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                                            <li>
-                                                <ul role="list" className="-mx-2 space-y-1">
+                                            {profile.map((user) => (
+                                                <li className='group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'>
 
-                                                    <li key="toggle">
-                                                        <a
-                                                            className={classNames(
-                                                                'w-fit',
-                                                                false
-                                                                    ? 'bg-gray-800 text-white'
-                                                                    : ' hover:text-white hover:bg-gray-800',
-                                                                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                                                            )}
-                                                        >
-                                                            <ThemeButton />
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
+                                                    <user.avatar className="h-6 w-6 shrink-0" aria-hidden="true" />
+                                                    <WelcomeClient>
+                                                        <Welcome />
+                                                    </WelcomeClient>
+
+                                                </li>
+                                            ))}
+
                                             <li>
                                                 <div className="text-xs font-semibold leading-6 ">Your Dashboard</div>
                                                 <ul role="list" className="-mx-2 mt-2 space-y-1">
@@ -118,11 +121,17 @@ const Sidebar = ({ children }: { children: React.ReactNode; }) => {
                                                             >
                                                                 <team.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
                                                                 {team.name}
+
+
                                                             </a>
                                                         </li>
                                                     ))}
+
+
                                                 </ul>
                                             </li>
+
+
 
                                             <li className="mt-auto">
                                                 <a
@@ -145,36 +154,28 @@ const Sidebar = ({ children }: { children: React.ReactNode; }) => {
             {/* Static sidebar for desktop */}
             <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex grow flex-col gap-y-5 overflow-y-auto  px-6 pb-4">
-                    <div className="flex h-16 shrink-0 items-center">
+                <div className="flex grow flex-col gap-y-5 overflow-y-auto  px-6 pb-4 ">
+                    <div className="flex h-16 shrink-0 items-center mb-[70px] mt-3">
                         <h1
                             className="text-[25px]"
                         >
                             Code <span className="text-rose-400"> Mates</span>
-                            <span className="font-inter text-[#407BBF]">.</span>
+                            <span className="font-inter text-white">.</span>
                         </h1>
                     </div>
-                    <nav className="flex flex-1 flex-col">
+                    <nav className="flex flex-1 flex-col mb-5">
                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                            <li>
-                                <ul role="list" className="-mx-2 space-y-1">
+                            {profile.map((user) => (
+                                <li className='group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'>
 
-                                    <li key="toggle">
-                                        <a
-                                            href="#"
-                                            className={classNames(
-                                                'w-fit',
-                                                false
-                                                    ? 'bg-gray-800 text-white'
-                                                    : ' hover:text-white hover:bg-gray-800',
-                                                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
-                                            )}
-                                        >
-                                            <ThemeButton />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                                    <user.avatar className="h-6 w-6 shrink-0" aria-hidden="true" />
+                                    <WelcomeClient>
+                                        <Welcome />
+                                    </WelcomeClient>
+
+                                </li>
+                            ))}
+
                             <li>
                                 <div className="text-xs font-semibold leading-6 ">Your Dashboard</div>
                                 <ul role="list" className="-mx-2 mt-2 space-y-1">
@@ -185,7 +186,7 @@ const Sidebar = ({ children }: { children: React.ReactNode; }) => {
                                                 className={classNames(
                                                     team.current
                                                         ? 'bg-gray-800 text-white'
-                                                        : ' hover:text-white hover:bg-gray-800',
+                                                        : 'hover:text-white hover:bg-gray-800',
                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                                 )}
                                             >
@@ -194,10 +195,16 @@ const Sidebar = ({ children }: { children: React.ReactNode; }) => {
                                             </a>
                                         </li>
                                     ))}
+
                                 </ul>
                             </li>
 
-                            <li className="mt-auto">
+                        </ul>
+                        <ul>
+                            <li className="mb-3">
+                                <ThemeButton></ThemeButton>
+                            </li>
+                            <li className="">
                                 <a
                                     href="#"
                                     className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6  hover:bg-gray-800 hover:text-white"

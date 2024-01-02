@@ -12,7 +12,6 @@ const RootLayout = ({ children }: { children: React.ReactNode; }) => {
     <html lang="en" suppressHydrationWarning={true}>
       <body>
         <Provider>
-
           <div className="bg-w-full overflow-hidden">
             {children}
           </div>
