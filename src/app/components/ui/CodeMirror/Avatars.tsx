@@ -24,7 +24,6 @@ export function Avatars() {
     </div>
   );
 }
-
 export function Avatar({ picture, name }: { picture: string; name: string }) {
   return (
     <div className={styles.avatar} data-tooltip={name}>

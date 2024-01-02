@@ -15,6 +15,10 @@
   margin-left: -0.75rem;
 }
 
+.sidebar{
+  place-content: start;
+}
+
 .avatar:before {
   content: attr(data-tooltip);
   position: absolute;

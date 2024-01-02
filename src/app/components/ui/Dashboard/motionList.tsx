@@ -43,9 +43,7 @@ export default function MotionList({ children, room_id }: { children: React.Reac
     <motion.div
 
       key={`${room_id}`}
-      // style={{
-      //   transformOrigin: getRandomTransformOrigin(),
-      // }}
+
       style={{
         ...getRandomTransformOrigin(),
 
@@ -57,6 +55,5 @@ export default function MotionList({ children, room_id }: { children: React.Reac
     >
       {children}
     </motion.div>
-
   );
 }

@@ -28,7 +28,7 @@ function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-const Sidebar = ({ children, userName, userAvatar, userGithub }: { children: React.ReactNode, userName: string, userAvatar: string, userGithub: string }) => {
+const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { children: React.ReactNode, userName: string, userAvatar: string, userGithub: string, roomMembers: React.ReactNode }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
 
@@ -119,8 +119,6 @@ const Sidebar = ({ children, userName, userAvatar, userGithub }: { children: Rea
                                                             >
                                                                 <team.icon className="h-6 w-6 shrink-0" aria-hidden="true" />
                                                                 {team.name}
-
-
                                                             </a>
                                                         </li>
                                                     ))}
@@ -128,8 +126,6 @@ const Sidebar = ({ children, userName, userAvatar, userGithub }: { children: Rea
 
                                                 </ul>
                                             </li>
-
-
 
                                             <li className="mt-auto">
                                                 <a
@@ -164,14 +160,14 @@ const Sidebar = ({ children, userName, userAvatar, userGithub }: { children: Rea
                     <nav className="flex flex-1 flex-col mb-5">
                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
 
-                            <li className='group flex gap-x-3 px-5 rounded-[1.25rem] p-2 bg-rose-100 text-sm text-rose-900 leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
+                            <li className='flex items-center justify-center gap-x-3 px-2 py-1 rounded-[1.25rem] bg-rose-100 text-sm text-rose-900 leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
 
 
                                 <Avatar picture={userAvatar} name={userName}></Avatar>
-                                <div>
+                                <div className="w-fit">
                                     <p className="font-semibold">{userName}</p>
 
-                                    <p className='text-[12px] font-normal'>Github ID : {userGithub} </p>
+                                    <p className='text-sm font-normal'>Github ID : {userGithub} </p>
                                 </div>
 
                             </li>
@@ -196,9 +192,10 @@ const Sidebar = ({ children, userName, userAvatar, userGithub }: { children: Rea
                                             </a>
                                         </li>
                                     ))}
-
                                 </ul>
                             </li>
+
+                            {roomMembers}
 
                         </ul>
                         <ul>
