@@ -1,5 +1,6 @@
-
+"use client"
 import React from 'react'
+import { use } from "react";
 import "@/styles/globals.css";
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react'
@@ -14,10 +15,8 @@ import ThemeButton from './ThemeButton';
 
 import Welcome from './Welcome';
 import WelcomeClient from './WelcomeClient';
-import Header from './Header';
-import { getUser } from "@src/app/api/actions";
-
-
+import { UserType } from '@types';
+import { Avatar } from '../ui/CodeMirror/Avatars';
 
 const teams = [
     { id: 1, name: 'Home', href: '#', icon: HomeIcon, current: true },
@@ -31,7 +30,7 @@ function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
-const Sidebar = ({ children }: { children: React.ReactNode; }) => {
+const Sidebar = ({ children , userName, userAvatar,userGithub}: { children: React.ReactNode , userName: string, userAvatar:string, userGithub:string}) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
 
 
@@ -98,9 +97,7 @@ const Sidebar = ({ children }: { children: React.ReactNode; }) => {
                                                 <li className='group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'>
 
                                                     <user.avatar className="h-6 w-6 shrink-0" aria-hidden="true" />
-                                                    <WelcomeClient>
-                                                        <Welcome />
-                                                    </WelcomeClient>
+                                                    {userName}
 
                                                 </li>
                                             ))}
@@ -166,12 +163,15 @@ const Sidebar = ({ children }: { children: React.ReactNode; }) => {
                     <nav className="flex flex-1 flex-col mb-5">
                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
                             {profile.map((user) => (
-                                <li className='group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'>
+                                <li className='group flex gap-x-3 px-5 rounded-md p-2 bg-gray-800 text-sm text-white leading-6 font-semibold'>
 
-                                    <user.avatar className="h-6 w-6 shrink-0" aria-hidden="true" />
-                                    <WelcomeClient>
-                                        <Welcome />
-                                    </WelcomeClient>
+
+                                    <Avatar picture={userAvatar} name={userName}></Avatar>
+                                    <div>
+                                    {userName}
+                                    <br/>
+                                    <p className='text-[10px]'>Github ID : {userGithub} </p>
+                                    </div>
 
                                 </li>
                             ))}
