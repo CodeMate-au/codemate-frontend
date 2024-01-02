@@ -1,6 +1,5 @@
 "use client"
 import { useRouter, usePathname } from 'next/navigation';
-
 type Props = {}
 
 function WelcomeClient({ children }: { children: React.ReactNode; }) {
@@ -13,5 +12,4 @@ function WelcomeClient({ children }: { children: React.ReactNode; }) {
     </>
   )
 }
-
-export default WelcomeClient
+export default WelcomeClient;     

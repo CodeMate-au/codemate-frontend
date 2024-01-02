@@ -5,7 +5,7 @@ import { getUser } from '@src/app/api/actions';
 // Using Next.js
 export function middleware(request: NextRequest) {
   let token = request.cookies.get('session-token');
-  // console.log('token here', token);
+
   if (!token) {
     const url = request.nextUrl.clone();
 

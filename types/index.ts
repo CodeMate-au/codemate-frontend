@@ -15,3 +15,13 @@ export interface FeedBackProps {
     name: string;
     img: string | any;
 }
+
+export interface UserType{
+    
+    id: number;
+    email: string;
+    name: string;
+    githubId: string;
+    avatar: string;
+      
+}

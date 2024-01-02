@@ -9,7 +9,7 @@ type code = {
 }
 export default function Hero() {
   return (
-    <section id="home" className={`flex md:flex-row flex-col ${styles.paddingY}`}>
+    <section id="home" className={`flex md:flex-row flex-col ${styles.paddingY} ${styles.paddingX}`}>
 
       <AnimatePresence>
 
@@ -79,7 +79,7 @@ export default function Hero() {
                     "0px 1px 4px rgba(13, 34, 71, 0.17), inset 0px 0px 0px 1px #061530, inset 0px 0px 0px 2px rgba(255, 255, 255, 0.1)",
                 }}
               >
-                <span className="w-5 h-5 rounded-full bg-[#407BBF] flex items-center justify-center">
+                <span className="w-5 h-5 rounded-full bg-rose-400 flex items-center justify-center">
                   <svg
                     className="w-[16px] h-[16px"
                     fill="none"

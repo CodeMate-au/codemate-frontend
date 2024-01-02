@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 
-import styles from "@/styles/style";
 import { SunIcon, MoonIcon } from '@heroicons/react/24/solid'
 
 const ThemeButton = () => {
@@ -17,10 +16,11 @@ const ThemeButton = () => {
   }
 
   return (
+
     <button
       aria-label='Toggle Dark Mode'
       type='button'
-      className='group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
+      className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:bg-gray-800 hover:text-white"
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
     >
       {resolvedTheme === 'dark' ? (
@@ -33,6 +33,7 @@ const ThemeButton = () => {
         Dark Mode</>
       )}
     </button>
+
   )
 }
 
