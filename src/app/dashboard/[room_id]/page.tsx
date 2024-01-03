@@ -16,7 +16,9 @@ export default function Page() {
   return (
 
     <div className={`${styles.padding}`}>
-      <ShareModal />
+      <div className="mb-8">
+        <ShareModal />
+      </div>
       <LanguageDropdown
         selectedLanguage={selectedLanguage}
         setSelectedLanguage={setSelectedLanguage}

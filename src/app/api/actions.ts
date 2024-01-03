@@ -28,9 +28,10 @@ export async function createRoom(formData: FormData) {
     // const newRoom = await response.json();
     // return newRoom;
     revalidateTag("rooms");
+    console.log("redirect");
     redirect("/dashboard");
     // revalidatePath('/dashboard');
-    // return { message: 'Room created' };
+    return { message: "Room created" };
   } catch (err) {
     return { message: "Failed to create room" };
   }

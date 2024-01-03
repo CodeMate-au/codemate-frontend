@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { cookies } from "next/headers";
-import { revalidateTag, revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 
 export async function PUT(
   request: NextRequest,
@@ -23,9 +23,9 @@ export async function PUT(
   );
   const data = await response.json();
   console.log(data);
-  revalidateTag("room");
-  // revalidatePath("/dashboard/[room_id]");
+  // revalidateTag("room");
+  revalidatePath("/dashboard/[room_id]", "page");
   // revalidatePath("/", "layout");
 
-  return Response.json(data);
+  return Response.json({ revalidated: true, data });
 }

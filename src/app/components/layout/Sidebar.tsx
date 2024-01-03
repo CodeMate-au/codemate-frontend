@@ -120,7 +120,7 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                                                     ))}
                                                 </ul>
                                             </li>
-                                            {children}
+                                            {/* {children} */}
                                             {roomMembers}
                                             {/* {React.cloneElement(roomMembers as React.ReactElement, { children: <ShareModal></ShareModal> })} */}
 

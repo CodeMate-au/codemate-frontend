@@ -1,8 +1,23 @@
+
+import { useRouter } from "next/navigation";
+
+
 import { createRoom } from '@src/app/api/actions'
 export default function ModalForm() {
 
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const data = new FormData(form);
+
+    await createRoom(data);
+    router.back();
+  };
   return (
-    <form action={createRoom}>
+    <form action="POST" onSubmit={handleSubmit}>
       <div className="mt-2">
         <input
           type="text"

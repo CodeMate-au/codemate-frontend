@@ -3,6 +3,8 @@ import { Combobox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { useParams } from 'next/navigation'
 import { User } from '@src/app/lib/definitions'
+import { useRouter } from 'next/navigation';
+
 
 
 const getMembers = async (room_id: string) => {
@@ -28,6 +30,8 @@ export default function ShareCombo() {
 
 
   const params = useParams<{ room_id: string }>()
+
+  const router = useRouter();
 
 
   useEffect(() => {
@@ -70,6 +74,8 @@ export default function ShareCombo() {
       });
     }
     setIsLoading(false);
+    router.refresh();
+
 
   }
 

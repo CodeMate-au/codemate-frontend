@@ -6,6 +6,19 @@ import ModalButton from "@src/app/components/ui/Dashboard/Modal/ModalButton";
 import { getRooms } from "@src/app/api/actions";
 import { Room } from "@src/app/lib/definitions";
 import DeleteButton from "@src/app/components/ui/Dashboard/DeleteButton";
+
+import avatarStyles from "@styles/Avatars.module.css";
+function Avatar({ picture, name }: { picture: string; name: string }) {
+  return (
+    <div className={avatarStyles.avatar} data-tooltip={name}>
+      <img
+        src={picture}
+        className={avatarStyles.avatar_picture}
+        data-tooltip={name}
+      />
+    </div>
+  );
+}
 export default async function Page() {
   const roomsmap = await getRooms();
   return (
@@ -27,7 +40,19 @@ export default async function Page() {
              hover:bg-pink-100/40 hover:dark:bg-slate-900/40 transition duration-300 ease-in-out text-lg font-medium`
             }
           >
-            {room.name}
+            <div className={`flex items-center justify-between w-full`}>
+
+              {room.name}
+              {
+                room.members && room.members.map((member) => {
+                  return (
+                    <div key={member.id} className="flex">
+                      <Avatar picture={member.avatar} name={member.name} />
+                    </div>
+                  )
+                })
+              }
+            </div>
           </Link>
         ))
         }
