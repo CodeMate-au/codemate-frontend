@@ -1,6 +1,5 @@
 "use client"
-import React from 'react'
-import { use } from "react";
+import React, { ReactElement } from 'react'
 import "@/styles/globals.css";
 import { Fragment, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react'
@@ -8,19 +7,16 @@ import {
     Bars3Icon,
     Cog6ToothIcon,
     HomeIcon,
-    UsersIcon,
     XMarkIcon,
 } from '@heroicons/react/24/outline'
 import ThemeButton from './ThemeButton';
 
-import Welcome from './Welcome';
-import WelcomeClient from './WelcomeClient';
-import { UserType } from '@types';
 import { Avatar } from '../ui/CodeMirror/Avatars';
+import { usePathname } from 'next/navigation'
+import ShareModal from '../ui/Dashboard/Share/ShareModal';
 
 const teams = [
-    { id: 1, name: 'Home', href: '#', icon: HomeIcon, current: true },
-
+    { id: 1, name: 'Home', href: '/dashboard', icon: HomeIcon },
 ]
 
 
@@ -30,6 +26,7 @@ function classNames(...classes: string[]) {
 
 const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { children: React.ReactNode, userName: string, userAvatar: string, userGithub: string, roomMembers: React.ReactNode }) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
+    const pathname = usePathname()
 
 
     return (
@@ -91,29 +88,28 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
 
                                     <nav className="flex flex-1 flex-col">
                                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                                            <li className='group flex gap-x-3 px-5 rounded-[1.25rem] p-2 bg-rose-300 text-sm text-rose-950 leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
+                                            <li className='flex flex-wrap space-x-2 pl-2 py-2 rounded bg-rose-300 dark:bg-gray-800 text-sm  leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
 
 
-                                                <Avatar picture={userAvatar} name={userName}></Avatar>
-                                                <div>
+                                                <div className="w-fit">
                                                     <p className="font-semibold">{userName}</p>
 
-                                                    <p className='text-[12px] font-normal'>Github ID : {userGithub} </p>
+                                                    <p className='text-sm font-normal'>Github ID : {userGithub} </p>
                                                 </div>
-
+                                                <Avatar picture={userAvatar} name={userName}></Avatar>
                                             </li>
 
                                             <li>
                                                 <div className="text-xs font-semibold leading-6 ">Your Dashboard</div>
-                                                <ul role="list" className="-mx-2 mt-2 space-y-1">
+                                                <ul role="list" className="mt-2 space-y-1">
                                                     {teams.map((team) => (
                                                         <li key={team.name}>
                                                             <a
                                                                 href={team.href}
                                                                 className={classNames(
-                                                                    team.current
-                                                                        ? 'bg-gray-800 text-white'
-                                                                        : ' hover:text-white hover:bg-rose-400',
+                                                                    pathname === '/dashboard'
+                                                                        ? 'bg-rose-300 dark:bg-gray-800'
+                                                                        : 'hover:bg-rose-100 dark:hover:bg-gray-800',
                                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                                                 )}
                                                             >
@@ -122,19 +118,27 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                                                             </a>
                                                         </li>
                                                     ))}
-
-
                                                 </ul>
                                             </li>
+                                            {children}
+                                            {roomMembers}
+                                            {/* {React.cloneElement(roomMembers as React.ReactElement, { children: <ShareModal></ShareModal> })} */}
 
                                             <li className="mt-auto">
-                                                <a
-                                                    href="#"
-                                                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6  hover:bg-rose-400 hover:text-white"
-                                                >
-                                                    <Cog6ToothIcon className="h-6 w-6 shrink-0" aria-hidden="true" />
-                                                    Log Out
-                                                </a>
+                                                <ul>
+                                                    <li className="mb-3">
+                                                        <ThemeButton></ThemeButton>
+                                                    </li>
+                                                    <li className="">
+                                                        <a
+                                                            href="/"
+                                                            className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 dark:hover:bg-gray-800 hover:bg-rose-100 dark:text-white"
+                                                        >
+                                                            <Cog6ToothIcon className="h-6 w-6 shrink-0" aria-hidden="true" />
+                                                            Log Out
+                                                        </a>
+                                                    </li>
+                                                </ul>
                                             </li>
                                         </ul>
                                     </nav>
@@ -146,9 +150,9 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
             </Transition.Root>
 
             {/* Static sidebar for desktop */}
-            <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col rounded-r-[4rem] border-r-4 border-rose-300">
+            <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
                 {/* Sidebar component, swap this element with another sidebar if you like */}
-                <div className="flex grow flex-col gap-y-5 overflow-y-auto  px-6 pb-4 ">
+                <div className="flex grow flex-col gap-y-5 overflow-y-auto px-4 pb-4">
                     <div className="flex h-16 shrink-0 items-center mb-[70px] mt-3 ">
                         <h1
                             className="text-[25px]"
@@ -157,19 +161,17 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                             <span className="font-inter text-white">.</span>
                         </h1>
                     </div>
-                    <nav className="flex flex-1 flex-col mb-5">
-                        <ul role="list" className="flex flex-1 flex-col gap-y-7">
+                    <nav className="flex flex-1 flex-col mb-5 w-full">
+                        <ul role="list" className="flex flex-1 flex-col gap-y-7 w-full">
+                            <li className='flex flex-wrap space-x-2 pl-2 py-2 rounded bg-rose-300 dark:bg-gray-800 text-sm  leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
 
-                            <li className='flex items-center justify-center gap-x-3 px-2 py-1 rounded-[1.25rem] bg-rose-100 text-sm text-rose-900 leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
 
-
-                                <Avatar picture={userAvatar} name={userName}></Avatar>
                                 <div className="w-fit">
                                     <p className="font-semibold">{userName}</p>
 
                                     <p className='text-sm font-normal'>Github ID : {userGithub} </p>
                                 </div>
-
+                                <Avatar picture={userAvatar} name={userName}></Avatar>
                             </li>
 
 
@@ -181,9 +183,9 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                                             <a
                                                 href={team.href}
                                                 className={classNames(
-                                                    team.current
-                                                        ? 'bg-rose-300 text-white'
-                                                        : 'hover:text-white hover:bg-rose-300',
+                                                    pathname === '/dashboard'
+                                                        ? 'bg-rose-300 dark:bg-gray-800'
+                                                        : 'hover:bg-rose-100 dark:hover:bg-gray-800',
                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                                 )}
                                             >
@@ -194,9 +196,8 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                                     ))}
                                 </ul>
                             </li>
-
-                            {roomMembers}
-
+                            {/* {roomMembers} */}
+                            {React.cloneElement(roomMembers as ReactElement, { children: <ShareModal /> })}
                         </ul>
                         <ul>
                             <li className="mb-3">
@@ -205,7 +206,7 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                             <li className="">
                                 <a
                                     href="/"
-                                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6  hover:bg-rose-300 hover:text-white"
+                                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 dark:hover:bg-gray-800 hover:bg-rose-100 dark:text-white"
                                 >
                                     <Cog6ToothIcon className="h-6 w-6 shrink-0" aria-hidden="true" />
                                     Log Out

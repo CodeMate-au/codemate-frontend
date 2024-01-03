@@ -1,23 +1,29 @@
 import styles from "@styles/Avatars.module.css";
 import { getRoom } from "@src/app/api/actions";
-// import { Avatar } from '../../../components/ui/CodeMirror/Avatars';
-export default async function RoomMember({ params }: { params: { room_id: string } }) {
+
+export default async function RoomMember({ children, params }: { children: React.ReactNode, params: { room_id: string } }) {
   const room = await getRoom(Number(params.room_id));
   const members = room.members;
 
   return (
-    <div>
-      {members && members.map((member) => {
-        return (
-          <div key={member.id}>
-            {member.name}
-            {member.avatar}
-            <Avatar picture={member.avatar} name={member.name} />
-          </div>
-        )
-      })}
-    </div>
-  )
+    <li>
+      <div className="text-xs font-semibold leading-6 ">Room's Members</div>
+      <ul role="list" className="mt-2 flex">
+        {members && members.map((member) => {
+          return (
+            <div key={member.id}>
+
+              <Avatar picture={member.avatar} name={member.name} />
+            </div>
+          )
+        })}
+      </ul>
+
+      {children}
+
+
+
+    </li>)
 }
 
 

@@ -10,8 +10,14 @@ const DashboardLayout = ({ children, modal, roomMembers }: { children: React.Rea
   const username = use(getUser());
   console.log(username)
   return (
-    <Sidebar userName={username.name} userAvatar={username.avatar} userGithub={username.githubId} roomMembers={roomMembers}> {modal} {children}
+    // <div className="flex">
+    <Sidebar userName={username.name} userAvatar={username.avatar} userGithub={username.githubId} roomMembers={roomMembers}>
+      {modal} {children}
     </Sidebar>
+    //   <main className="w-full py-10">
+    //     <div className="px-4 sm:px-6 lg:px-8"></div>
+    //   </main>
+    // </div >
   );
 };
 
