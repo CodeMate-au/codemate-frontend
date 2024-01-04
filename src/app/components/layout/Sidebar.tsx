@@ -88,7 +88,7 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
 
                                     <nav className="flex flex-1 flex-col">
                                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                                            <li className='flex flex-wrap space-x-2 pl-2 py-2 rounded bg-rose-300 dark:bg-gray-800 text-sm  leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
+                                            <li className='flex  justify-between space-x-2 px-2 py-2 rounded bg-rose-300 dark:bg-gray-800 text-sm  leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
 
 
                                                 <div className="w-fit">
@@ -163,7 +163,7 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                     </div>
                     <nav className="flex flex-1 flex-col mb-5 w-full">
                         <ul role="list" className="flex flex-1 flex-col gap-y-7 w-full">
-                            <li className='flex flex-wrap space-x-2 pl-2 py-2 rounded bg-rose-300 dark:bg-gray-800 text-sm  leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
+                            <li className='flex justify-between space-x-2 px-2 py-2 rounded bg-rose-300 dark:bg-gray-800 text-sm  leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
 
 
                                 <div className="w-fit">

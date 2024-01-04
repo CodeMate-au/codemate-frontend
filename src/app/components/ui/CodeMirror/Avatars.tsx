@@ -20,8 +20,7 @@ function isInfo(object: any): object is Info {
 export function Avatars() {
   const users = useOthers();
   const currentUser = useSelf();
-  // console.log("Users:", users);
-  // console.log("Current User:", currentUser);
+  // console.log("git g
 
 
   return (
