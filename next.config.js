@@ -12,8 +12,8 @@ const nextConfig = {
         loaders.use.forEach((l) => {
           // Only focus on loaders that are an object and have a `loader` property set to `css-loader`
           if (
-            typeof l !== 'string' &&
-            typeof l.loader === 'string' &&
+            typeof l !== "string" &&
+            typeof l.loader === "string" &&
             /(?<!post)css-loader/.test(l.loader)
           ) {
             // If there are no module options originally set, skip this loader
@@ -27,7 +27,7 @@ const nextConfig = {
                 ...others,
                 getLocalIdent: (ctx, localIdentName, localName) => {
                   // If the class name is `dark`, return it instead of hashing it
-                  if (localName === 'dark') return localName;
+                  if (localName === "dark") return localName;
                   // Otherwise, call the original function and return the value
                   return getLocalIdent(ctx, localIdentName, localName);
                 },
@@ -39,6 +39,14 @@ const nextConfig = {
     });
 
     return config;
+  },
+
+  images: {
+    remotePatterns: [
+      {
+        hostname: "avatars.githubusercontent.com",
+      },
+    ],
   },
 };
 

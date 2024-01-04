@@ -15,7 +15,7 @@ export default function InputTerminal({ stdinRef, stdin, setStdin }: Props) {
 
   const onUpdate = EditorView.updateListener.of((v) => {
     setStdin(v.state.doc.toString())
-    console.log(stdin)
+    // console.log(stdin)
   })
   useEffect(() => {
     let view: EditorView | null = null;

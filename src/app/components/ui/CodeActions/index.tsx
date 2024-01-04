@@ -1,4 +1,11 @@
-const CodeActions = ({ runEditorCode, refactorCode, isLoading }) => {
+import { FC } from 'react';
+
+interface CodeActionsProps {
+  runEditorCode: () => void;
+  isLoading: boolean;
+}
+
+const CodeActions: FC<CodeActionsProps> = ({ runEditorCode, isLoading }) => {
   return (
     <div className="flex space-x-2 w-full justify-end">
       <button
