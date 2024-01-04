@@ -16,7 +16,7 @@ import { usePathname } from 'next/navigation'
 import ShareModal from '../ui/Dashboard/Share/ShareModal';
 
 const teams = [
-    { id: 1, name: 'Home', href: '/dashboard', icon: HomeIcon },
+    { id: 1, name: 'Home', href: '/dashboard', icon: HomeIcon, current: true },
 ]
 
 
@@ -107,9 +107,9 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                                                             <a
                                                                 href={team.href}
                                                                 className={classNames(
-                                                                    pathname === '/dashboard'
-                                                                        ? 'bg-rose-300 dark:bg-gray-800'
-                                                                        : 'hover:bg-rose-100 dark:hover:bg-gray-800',
+                                                                    team.current
+                                                                        ? 'bg-gray-800 text-white'
+                                                                        : 'text-gray-400 hover:text-white hover:bg-gray-800',
                                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                                                 )}
                                                             >
@@ -132,7 +132,7 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                                                     <li className="">
                                                         <a
                                                             href="/"
-                                                            className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 dark:hover:bg-gray-800 hover:bg-rose-100 dark:text-white"
+                                                            className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:text-white hover:bg-gray-800"
                                                         >
                                                             <Cog6ToothIcon className="h-6 w-6 shrink-0" aria-hidden="true" />
                                                             Log Out
@@ -183,9 +183,9 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                                             <a
                                                 href={team.href}
                                                 className={classNames(
-                                                    pathname === '/dashboard'
-                                                        ? 'bg-rose-300 dark:bg-gray-800'
-                                                        : 'hover:bg-rose-100 dark:hover:bg-gray-800',
+                                                    team.current
+                                                        ? 'bg-gray-800 text-white'
+                                                        : 'text-gray-400 hover:text-white hover:bg-gray-800',
                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                                 )}
                                             >
@@ -206,16 +206,17 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                             <li className="">
                                 <a
                                     href="/"
-                                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 dark:hover:bg-gray-800 hover:bg-rose-100 dark:text-white"
+                                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:text-white hover:bg-gray-800"
                                 >
+
                                     <Cog6ToothIcon className="h-6 w-6 shrink-0" aria-hidden="true" />
                                     Log Out
                                 </a>
                             </li>
                         </ul>
-                    </nav>
-                </div>
-            </div>
+                    </nav >
+                </div >
+            </div >
 
             <div className="lg:pl-72">
                 <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 px-4">
@@ -229,7 +230,7 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                     <div className="px-4 sm:px-6 lg:px-8">{children}</div>
                 </main>
             </div>
-        </div>
+        </div >
     )
 }
 export default Sidebar;
