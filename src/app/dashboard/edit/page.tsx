@@ -40,7 +40,7 @@ export default function Page() {
       <div className="w-full py-16 space-y-4">
         {rooms.map((room: Room) => (
 
-          <MotionList room_id={room.id}>
+          <MotionList room_id={room.id} key={room.id}>
             <div
               // key={room.id}
               className={
@@ -49,7 +49,7 @@ export default function Page() {
               }
             >
               <button className={`w-full ${styles.justifyStart}`} onClick={async () => {
-                console.log("delete room")
+                // console.log("delete room")
                 await deleteRoom(room.id);
                 setRooms(rooms.filter((r) => r.id !== room.id));
               }}>

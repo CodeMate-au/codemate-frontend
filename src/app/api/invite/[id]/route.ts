@@ -10,7 +10,7 @@ export async function PUT(
   const token = cookieStore.get("session-token")?.value;
 
   const formData = await request.formData();
-  console.log("param room", params.id);
+  // console.log("param room", params.id);
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/room/${params.id}`,
     {
@@ -22,7 +22,7 @@ export async function PUT(
     }
   );
   const data = await response.json();
-  console.log(data);
+  // console.log(data);
   // revalidateTag("room");
   revalidatePath("/dashboard/[room_id]", "page");
   // revalidatePath("/", "layout");

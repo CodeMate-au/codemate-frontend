@@ -14,7 +14,7 @@ export async function createRoom(formData: FormData) {
     // console.log('room name', formData.get('name'));
 
     formData.append("userId", `${(await getUser()).id}`);
-    console.log("form data", formData);
+    // console.log("form data", formData);
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/room`,
       {
@@ -28,7 +28,7 @@ export async function createRoom(formData: FormData) {
     // const newRoom = await response.json();
     // return newRoom;
     revalidateTag("rooms");
-    console.log("redirect");
+
     redirect("/dashboard");
     // revalidatePath('/dashboard');
     return { message: "Room created" };

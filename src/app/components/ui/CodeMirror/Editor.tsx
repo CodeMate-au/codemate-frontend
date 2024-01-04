@@ -6,14 +6,13 @@ import { EditorView, basicSetup } from "codemirror";
 import { java } from '@codemirror/lang-java';
 import { python } from '@codemirror/lang-python';
 import { EditorState } from "@codemirror/state";
-import { indentWithTab, defaultKeymap, historyKeymap, history } from "@codemirror/commands"
-import { drawSelection, keymap, lineNumbers } from "@codemirror/view"
+import { indentWithTab } from "@codemirror/commands"
+import { keymap } from "@codemirror/view"
 import { javascript } from "@codemirror/lang-javascript";
 import { useCallback, useEffect, useState, useRef } from "react";
 import LiveblocksProvider from "@liveblocks/yjs";
 import { TypedLiveblocksProvider, useRoom, useSelf } from "@/liveblocks.config";
 import EditorStyles from "@styles/Editor.module.css";
-import styles from "@styles/style";
 
 import { Avatars } from "./Avatars";
 import { Toolbar } from "./Toolbar";
@@ -65,7 +64,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
 
       const observer = () => {
         setCode(ytext.toString());
-        console.log('Document changed:', ytext.toString());
+        // console.log('Document changed:', ytext.toString());
       };
       ytext.observe(observer);
     }
@@ -90,7 +89,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
     const undoManager = new Y.UndoManager(ytextInstance);
     setYUndoManager(undoManager);
 
-    console.log(selectedLanguage)
+    // console.log(selectedLanguage)
 
     // Set up CodeMirror and extensions
     const state = EditorState.create({
@@ -133,11 +132,11 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
       while (outputData.status.id === 1 || outputData.status.id === 2) {
         const statusResponse = await fetch(`/api/get_submission?token=${outputData.token}`);
         outputData = await statusResponse.json();
-        console.log('output', outputData);
+        // console.log('output', outputData);
         // Wait for a second before polling again to avoid overloading the server
         await new Promise(resolve => setTimeout(resolve, 2000));
       }
-      console.log('outpåut', outputData);
+      // console.log('outpåut', outputData);
 
       setOutput(assoc('data', outputData.stdout || outputData.stderr));
       setOutput(assoc('status', outputData.status.id));
@@ -162,7 +161,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
     language_id: number,
     stdin: string | null
   }) => {
-    console.log('code submitted', source_code)
+    // console.log('code submitted', source_code)
     const payload = { source_code, language_id, stdin };
     const response = await fetch(`/api/run_code`, {
       method: 'POST',
@@ -172,7 +171,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
       body: JSON.stringify(payload),
     });
     const data = await response.json();
-    console.log('submission response', data);
+    // console.log('submission response', data);
 
     return data.token
   }
@@ -233,6 +232,7 @@ export function CollaborativeEditor({ selectedLanguage }: Props) {
       </Tab.Group >
       < CodeAction
         runEditorCode={runEditorCode}
+        isLoading={isLoading}
       />
     </>
   );

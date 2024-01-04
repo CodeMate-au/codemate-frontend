@@ -11,7 +11,7 @@ export default async function ExecuteButton({ source_code, language_id, stdin }:
 
 
   const submitCodeHandler = async () => {
-    console.log('code submitted', source_code)
+    // console.log('code submitted', source_code)
     const payload = { source_code, language_id, stdin };
     const response = await fetch(`/api/run_code`, {
       method: 'POST',
@@ -21,7 +21,7 @@ export default async function ExecuteButton({ source_code, language_id, stdin }:
       body: JSON.stringify(payload),
     });
     const data = await response.json();
-    console.log('submission response', data);
+    // console.log('submission response', data);
   }
 
   return (

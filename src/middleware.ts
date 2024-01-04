@@ -1,20 +1,22 @@
-import { NextResponse, NextRequest } from 'next/server';
-import { cookies } from 'next/headers';
-import { getUser } from '@src/app/api/actions';
+import { NextResponse, NextRequest } from "next/server";
+import { cookies } from "next/headers";
+import { getUser } from "@src/app/api/actions";
 
 // Using Next.js
-export function middleware(request: NextRequest) {
-  let token = request.cookies.get('session-token');
+export async function middleware(request: NextRequest) {
+  // let token = request.cookies.get("session-token");
+  const user = await getUser();
+  // console.log(user);
 
-  if (!token) {
+  if (!user.id) {
     const url = request.nextUrl.clone();
 
-    url.pathname = '/';
+    url.pathname = "/";
     return NextResponse.redirect(url);
   }
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/api/:path*', '/dashboard/:path*'],
+  matcher: ["/api/:path*", "/dashboard/:path*"],
 };

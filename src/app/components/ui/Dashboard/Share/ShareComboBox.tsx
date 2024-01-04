@@ -17,7 +17,7 @@ const getMembers = async (room_id: string) => {
   }
 
   const members = await response.json();
-  console.log(members);
+  // console.log(members);
   return members;
 }
 
