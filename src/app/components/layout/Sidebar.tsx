@@ -16,7 +16,7 @@ import { usePathname } from 'next/navigation'
 import ShareModal from '../ui/Dashboard/Share/ShareModal';
 
 const teams = [
-    { id: 1, name: 'Home', href: '/dashboard', icon: HomeIcon },
+    { id: 1, name: 'Home', href: '/dashboard', icon: HomeIcon, current: true },
 ]
 
 
@@ -88,7 +88,7 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
 
                                     <nav className="flex flex-1 flex-col">
                                         <ul role="list" className="flex flex-1 flex-col gap-y-7">
-                                            <li className='flex flex-wrap space-x-2 pl-2 py-2 rounded bg-rose-300 dark:bg-gray-800 text-sm  leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
+                                            <li className='flex flex-wrap space-x-2 pl-2 py-2  bg-slate-900 text-sm leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
 
 
                                                 <div className="w-fit">
@@ -107,9 +107,9 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                                                             <a
                                                                 href={team.href}
                                                                 className={classNames(
-                                                                    pathname === '/dashboard'
-                                                                        ? 'bg-rose-300 dark:bg-gray-800'
-                                                                        : 'hover:bg-rose-100 dark:hover:bg-gray-800',
+                                                                    team.current
+                                                                        ? 'bg-gray-800 text-white'
+                                                                        : 'text-gray-400 hover:text-white hover:bg-gray-800',
                                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                                                 )}
                                                             >
@@ -132,7 +132,7 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                                                     <li className="">
                                                         <a
                                                             href="/"
-                                                            className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 dark:hover:bg-gray-800 hover:bg-rose-100 dark:text-white"
+                                                            className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:text-white hover:bg-gray-800"
                                                         >
                                                             <Cog6ToothIcon className="h-6 w-6 shrink-0" aria-hidden="true" />
                                                             Log Out
@@ -163,9 +163,7 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                     </div>
                     <nav className="flex flex-1 flex-col mb-5 w-full">
                         <ul role="list" className="flex flex-1 flex-col gap-y-7 w-full">
-                            <li className='flex flex-wrap space-x-2 pl-2 py-2 rounded bg-rose-300 dark:bg-gray-800 text-sm  leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
-
-
+                            <li className='flex flex-wrap space-x-2 pl-2 py-2 rounded-[.5rem] bg-slate-900 text-gray-300 border-2 dark:border-white dark:text-white dark:bg-gray-800 text-sm  leading-6 focus-visible:ring-2 focus-visible:ring-white/75'>
                                 <div className="w-fit">
                                     <p className="font-semibold">{userName}</p>
 
@@ -183,9 +181,9 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                                             <a
                                                 href={team.href}
                                                 className={classNames(
-                                                    pathname === '/dashboard'
-                                                        ? 'bg-rose-300 dark:bg-gray-800'
-                                                        : 'hover:bg-rose-100 dark:hover:bg-gray-800',
+                                                    team.current
+                                                        ? 'bg-gray-800 text-white'
+                                                        : 'text-gray-400 hover:text-white hover:bg-gray-800',
                                                     'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold'
                                                 )}
                                             >
@@ -206,8 +204,9 @@ const Sidebar = ({ children, userName, userAvatar, userGithub, roomMembers }: { 
                             <li className="">
                                 <a
                                     href="/"
-                                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 dark:hover:bg-gray-800 hover:bg-rose-100 dark:text-white"
+                                    className="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 hover:text-white hover:bg-gray-800"
                                 >
+
                                     <Cog6ToothIcon className="h-6 w-6 shrink-0" aria-hidden="true" />
                                     Log Out
                                 </a>
