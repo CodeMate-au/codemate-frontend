@@ -9,6 +9,12 @@ import LiveblocksProvider from "@liveblocks/yjs";
 
 import styles from "./CollaborativeEditor.module.css";
 
+type userLiveblock = {
+  name: string,
+  color: string,
+  picture: string,
+}
+
 
 // Collaborative code editor with undo/redo, live cursors, and live avatars
 export function CollaborativeEditor() {
@@ -17,7 +23,7 @@ export function CollaborativeEditor() {
   const [yUndoManager, setYUndoManager] = useState<Y.UndoManager>();
 
   // Get user info from Liveblocks authentication endpoint
-  const userInfo = useSelf((me) => me.info);
+  const userInfo = useSelf((me) => me.info) as userLiveblock;
 
   const ref = useCallback((node: HTMLElement | null) => {
     if (!node) return;

@@ -27,7 +27,6 @@
     "ramda": "^0.29.1",
     "react": "^18",
     "react-dom": "^18",
-    "swr": "^2.2.4",
     "y-codemirror.next": "^0.3.2",
     "yjs": "^13.6.10"
   },

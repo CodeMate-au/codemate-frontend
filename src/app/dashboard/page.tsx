@@ -47,7 +47,7 @@ export default async function Page() {
                 room.members && room.members.map((member) => {
                   return (
                     <div key={member.id} className="flex">
-                      <Avatar picture={member.avatar} name={member.name} />
+                      <Avatar picture={member.avatar || ''} name={member.name || ''} />
                     </div>
                   )
                 })

@@ -27,5 +27,8 @@ export async function PUT(
   revalidatePath("/dashboard/[room_id]", "page");
   // revalidatePath("/", "layout");
 
-  return Response.json({ revalidated: true, data });
+  return new Response(JSON.stringify({ revalidated: true, data }), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 }
