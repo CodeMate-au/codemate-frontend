@@ -42,7 +42,7 @@ export async function getRooms() {
   const token = cookieStore.get("session-token")?.value;
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/room`, {
-    next: { tags: ["rooms"], revalidate: 3600 },
+    next: { tags: ["rooms"] },
     headers: {
       Cookie: `session-token=${token};`,
     },

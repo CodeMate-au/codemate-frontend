@@ -8,13 +8,14 @@ export const metadata = {
 
 
 import Provider from "./provider";
-import { Header, Footer } from "@src/app/components/layout";
+// import { Header, Footer } from "@src/app/components/layout";
+export const dynamic = 'force-dynamic'
+
 const RootLayout = ({ children }: { children: React.ReactNode; }) => {
-  
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <body>
-   
+
 
         <Provider >
           <div className="bg-w-full overflow-hidden">
